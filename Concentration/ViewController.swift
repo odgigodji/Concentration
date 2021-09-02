@@ -27,13 +27,12 @@ class ViewController: UIViewController {
     //надпись внизу
     @IBOutlet weak var flipCountLabel: UILabel!
     
-//    @IBOutlet var cardButtons: [UIButton]! //типо массив кнопок
+    //типо массив кнопок
     @IBOutlet var cardButtons: [UIButton]!
-    
     
     //actions:_ - имя внешнее аргумента sender - внутреннее имя
     @IBAction func touchCard(_ sender: UIButton) {
-        print("Touch card:")
+//        print("Touch card:")
         flipCount += 1
         //тут мы чекаем не возвращается ли нам нил
         //.firstIndex = Returns the first index where the specified value appears in the collection.
@@ -45,7 +44,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
     func updateViewFromModel() {
         //.indeces - all indices
         for index in cardButtons.indices {
@@ -56,12 +54,8 @@ class ViewController: UIViewController {
                 button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             } else {
                 button.setTitle("", for: UIControl.State.normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-                //если не совпало ставим имя кнопки = emodji
-                
-                //flipOver
-//                button.setTitle("", for: UIControl.State.normal)
-//                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9999018312, green: 1, blue: 0.9998798966, alpha: 0) : #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+
             }
         }
     }
@@ -73,8 +67,10 @@ class ViewController: UIViewController {
     func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+            emoji[card.identifier] = emojiChoices.remove(at: randomIndex) //удаляем из массива строк  и добавляем в словарь
         }
+        
+        
         return emoji[card.identifier] ?? "?" //??-check nil
     }
 }

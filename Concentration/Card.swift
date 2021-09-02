@@ -12,7 +12,7 @@ import Foundation
 //no inheritance in struct
 //structs are value types
 struct Card {
-    var isFaceUp = false  //перевернута
+    var isFaceUp = false  //лицевой стороной вверх
     var isMatched = false //совпала
     var identifier: Int
     
