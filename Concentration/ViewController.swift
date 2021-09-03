@@ -42,6 +42,7 @@ class ViewController: UIViewController {
         flipCount += 1
         //тут мы чекаем не возвращается ли нам нил
         //.firstIndex = Returns the first index where the specified value appears in the collection.
+        print("count \(cardButtons.count)")
         if let cardNumber = cardButtons.firstIndex(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel() //нужно для оьновления UI - моя функция
@@ -49,7 +50,7 @@ class ViewController: UIViewController {
             print("chosen card was not in cardButtons")
         }
     }
-    
+
     func updateViewFromModel() {
         //.indeces - all indices
         for index in cardButtons.indices {
@@ -60,8 +61,11 @@ class ViewController: UIViewController {
                 button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             } else {
                 button.setTitle("", for: UIControl.State.normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9999018312, green: 1, blue: 0.9998798966, alpha: 0) : #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-
+                if card.isMatched {
+                    button.backgroundColor = #colorLiteral(red: 0.9999018312, green: 1, blue: 0.9998798966, alpha: 0)
+                } else {
+                    button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                }
             }
         }
     }
@@ -71,12 +75,11 @@ class ViewController: UIViewController {
     var emoji = [Int:String]() //dictionary init
 
     func emoji(for card: Card) -> String {
+//        print("emoji func: \(Card.identifierFactory)")
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex) //удаляем из массива строк  и добавляем в словарь
         }
-        
-        
         return emoji[card.identifier] ?? "?" //??-check nil
     }
 }

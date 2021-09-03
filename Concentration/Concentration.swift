@@ -15,7 +15,8 @@ class Concentration {
 //    var cards: Array<Card>
 //    var cards = Array<Card>()
     var cards = [Card]()
-    
+
+    var numbersOfPairsOfCards = 0
     var indexOfOneAndOnlyFaceUpCard: Int?
     
     func chooseCard(at index: Int) {
@@ -23,13 +24,15 @@ class Concentration {
         if !cards[index].isMatched {
 //            print("card index is [\(index)] ", terminator: "")
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
-//                print("indexOfOneAndOnlyFaceUpCard is [\(indexOfOneAndOnlyFaceUpCard!)] ")
-//                print("matchIndex is [\(matchIndex)]")
-                
                 //check if cards match
                 if cards[matchIndex].identifier == cards[index].identifier {
+                    //cards is matched
+                    numbersOfPairsOfCards -= 1
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    if numbersOfPairsOfCards == 0 {
+                        print("game over")
+                    }
                 }
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = nil
@@ -41,10 +44,9 @@ class Concentration {
                 }
             cards[index].isFaceUp = true
             indexOfOneAndOnlyFaceUpCard = index
-//            print("indexOfOneAndOnlyFaceUpCard is [\(indexOfOneAndOnlyFaceUpCard!)] ")
             }
-            
         }
+        print("numbOfPairs is \(self.numbersOfPairsOfCards)")
     }
     //button with new game
     
@@ -66,6 +68,10 @@ class Concentration {
             //TODO: SHUFFLE THE CARDS
             cards.shuffle()
         }
-        
+        if numberOfPairsOfCards > 0 {
+            self.numbersOfPairsOfCards = numberOfPairsOfCards
+        }
+        print("numbOfPairs is \(self.numbersOfPairsOfCards)")
     }
+    
 }
