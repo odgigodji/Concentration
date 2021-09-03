@@ -30,6 +30,12 @@ class ViewController: UIViewController {
     //типо массив кнопок
     @IBOutlet var cardButtons: [UIButton]!
     
+    @IBOutlet weak var newGameButton: UIButton!
+    
+    @IBAction func newGame(_ sender: UIButton) {
+        print("new game")
+    }
+    
     //actions:_ - имя внешнее аргумента sender - внутреннее имя
     @IBAction func touchCard(_ sender: UIButton) {
 //        print("Touch card:")

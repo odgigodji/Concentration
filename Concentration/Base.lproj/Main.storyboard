@@ -166,12 +166,24 @@
                                     <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NTV-xH-TLp"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-My-NVR">
+                                <rect key="frame" x="113" y="348" width="149" height="117"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="newGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GbM-gD-c1h"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="flipCountLabel" destination="O2d-Co-fgu" id="OP9-l7-cqc"/>
+                        <outlet property="newGameButton" destination="AMD-My-NVR" id="ubc-kh-dcv"/>
                         <outletCollection property="cardButtons" destination="lK2-HN-KnS" collectionClass="NSMutableArray" id="cS0-4i-LWP"/>
                         <outletCollection property="cardButtons" destination="eNl-AF-bMn" collectionClass="NSMutableArray" id="VcH-nF-pSo"/>
                         <outletCollection property="cardButtons" destination="06m-Z4-k8l" collectionClass="NSMutableArray" id="w4Z-c5-LkI"/>

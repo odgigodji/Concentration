@@ -21,10 +21,10 @@ class Concentration {
     func chooseCard(at index: Int) {
 
         if !cards[index].isMatched {
-            print("card index is [\(index)] ", terminator: "")
+//            print("card index is [\(index)] ", terminator: "")
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
-                print("indexOfOneAndOnlyFaceUpCard is [\(indexOfOneAndOnlyFaceUpCard!)] ")
-                print("matchIndex is [\(matchIndex)]")
+//                print("indexOfOneAndOnlyFaceUpCard is [\(indexOfOneAndOnlyFaceUpCard!)] ")
+//                print("matchIndex is [\(matchIndex)]")
                 
                 //check if cards match
                 if cards[matchIndex].identifier == cards[index].identifier {
@@ -41,7 +41,7 @@ class Concentration {
                 }
             cards[index].isFaceUp = true
             indexOfOneAndOnlyFaceUpCard = index
-            print("indexOfOneAndOnlyFaceUpCard is [\(indexOfOneAndOnlyFaceUpCard!)] ")
+//            print("indexOfOneAndOnlyFaceUpCard is [\(indexOfOneAndOnlyFaceUpCard!)] ")
             }
             
         }

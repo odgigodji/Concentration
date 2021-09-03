@@ -34,6 +34,6 @@ struct Card {
     //self. - fix
     init() {
         self.identifier = Card.getUniqueIdentifier()
-        print("identifier is \(self.identifier)")
+//        print("identifier is \(self.identifier)")
     }
 }
