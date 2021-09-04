@@ -30,11 +30,10 @@ class ViewController: UIViewController {
     //типо массив кнопок
     @IBOutlet var cardButtons: [UIButton]!
     
-    @IBOutlet weak var newGameButton: UIButton!
-    
     @IBAction func newGame(_ sender: UIButton) {
         print("new game")
     }
+    @IBOutlet weak var newGameButton: UIButton!
     
     //actions:_ - имя внешнее аргумента sender - внутреннее имя
     @IBAction func touchCard(_ sender: UIButton) {
@@ -50,9 +49,29 @@ class ViewController: UIViewController {
             print("chosen card was not in cardButtons")
         }
     }
-
+    
+    @IBAction func startNewGame(_ sender: UIButton) {
+        for id in 0..<game.cards.count {
+            game.cards[id].isFaceUp = false
+            game.cards[id].isMatched = false
+            cardButtons[id].setTitle("", for: UIControl.State.normal)
+            cardButtons[id].backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        }
+        game.numbersOfPairsOfCards = (cardButtons.count + 1) / 2
+        cardButtons.shuffle()
+        newGameButton.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        newGameButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControl.State.normal)
+        newGameButton.setTitle("Reset", for: UIControl.State.normal)
+    }
+    
     func updateViewFromModel() {
         //.indeces - all indices
+        if game.numbersOfPairsOfCards == 0 {
+           newGameButton.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+           newGameButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControl.State.normal)
+            newGameButton.setTitle("New game", for: UIControl.State.normal)
+        }
+        
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]

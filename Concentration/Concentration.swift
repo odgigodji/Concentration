@@ -27,11 +27,12 @@ class Concentration {
                 //check if cards match
                 if cards[matchIndex].identifier == cards[index].identifier {
                     //cards is matched
-                    numbersOfPairsOfCards -= 1
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    numbersOfPairsOfCards -= 1
                     if numbersOfPairsOfCards == 0 {
                         print("game over")
+                        return
                     }
                 }
                 cards[index].isFaceUp = true
