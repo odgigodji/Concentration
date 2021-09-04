@@ -16,7 +16,7 @@ struct Card {
     var isMatched = false //совпала
     var identifier: Int
     
-    //i - internal name
+    //i - internal namec
     //identifier - external name
 
 //    init(identifier i: Int) {

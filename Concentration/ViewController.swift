@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 //MVC model controller view
 //model - our app
@@ -33,6 +34,7 @@ class ViewController: UIViewController {
     @IBAction func newGame(_ sender: UIButton) {
         print("new game")
     }
+    
     @IBOutlet weak var newGameButton: UIButton!
     
     //actions:_ - имя внешнее аргумента sender - внутреннее имя
@@ -62,6 +64,7 @@ class ViewController: UIViewController {
         newGameButton.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         newGameButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControl.State.normal)
         newGameButton.setTitle("Reset", for: UIControl.State.normal)
+        flipCount = 0
     }
     
     func updateViewFromModel() {
@@ -93,6 +96,8 @@ class ViewController: UIViewController {
     
     var emoji = [Int:String]() //dictionary init
 
+    //MARK: handle card touch behavior
+
     func emoji(for card: Card) -> String {
 //        print("emoji func: \(Card.identifierFactory)")
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
@@ -101,5 +106,7 @@ class ViewController: UIViewController {
         }
         return emoji[card.identifier] ?? "?" //??-check nil
     }
+    
+    
 }
 

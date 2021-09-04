@@ -13,6 +13,8 @@
 		24392E4B26D914BD00738AFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24392E4926D914BD00738AFF /* Main.storyboard */; };
 		24392E4D26D914BF00738AFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24392E4C26D914BF00738AFF /* Assets.xcassets */; };
 		24392E5026D914BF00738AFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24392E4E26D914BF00738AFF /* LaunchScreen.storyboard */; };
+		24511C1226E3B4D60058EFAC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24511C1126E3B4D60058EFAC /* MapKit.framework */; };
+		24511C1426E3B4DD0058EFAC /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24511C1326E3B4DD0058EFAC /* Metal.framework */; };
 		24D7014626DEAF3B005CAF1E /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D7014526DEAF3B005CAF1E /* Concentration.swift */; };
 		24D7014826DEB03D005CAF1E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D7014726DEB03D005CAF1E /* Card.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +28,8 @@
 		24392E4C26D914BF00738AFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24392E4F26D914BF00738AFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24392E5126D914BF00738AFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24511C1126E3B4D60058EFAC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		24511C1326E3B4DD0058EFAC /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		24D7014526DEAF3B005CAF1E /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		24D7014726DEB03D005CAF1E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -35,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24511C1426E3B4DD0058EFAC /* Metal.framework in Frameworks */,
+				24511C1226E3B4D60058EFAC /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +52,7 @@
 			children = (
 				24392E4226D914BD00738AFF /* Concentration */,
 				24392E4126D914BD00738AFF /* Products */,
+				24511C1026E3B4D60058EFAC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,6 +76,15 @@
 				24392E5126D914BF00738AFF /* Info.plist */,
 			);
 			path = Concentration;
+			sourceTree = "<group>";
+		};
+		24511C1026E3B4D60058EFAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24511C1326E3B4DD0058EFAC /* Metal.framework */,
+				24511C1126E3B4D60058EFAC /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2470654926D921D700FC4CA7 /* Supporting Files */ = {
@@ -232,7 +248,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -286,7 +302,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
