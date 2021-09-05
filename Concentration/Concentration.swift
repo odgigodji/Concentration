@@ -17,27 +17,49 @@ class Concentration {
     var cards = [Card]()
 
     var numbersOfPairsOfCards = 0
-    var indexOfOneAndOnlyFaceUpCard: Int?
+//    var indexOfOneAndOnlyFaceUpCard: Int? //old version
+    
+    //computed properties
+    var indexOfOneAndOnlyFaceUpCard: Int? {
+        get {
+            //calculate value depend on class member and logic
+            var foundIndex: Int? // = nil for default
+            for index in cards.indices {
+                if cards[index].isFaceUp { //found a faceup card
+                    if foundIndex == nil { //found first one
+                        foundIndex = index
+                    } else { return nil } //i found second faceup card
+                }
+            }
+            print("foundIndex is \(String(describing: foundIndex))")
+            return foundIndex
+        }
+        set(newValue) { //we can dont write "newValue" - default it is // just "set"
+            print("newValue is \(String(describing: newValue))")
+            for index in cards.indices { //go throug all cards while not
+                cards[index].isFaceUp = (index == newValue) //its bool
+            }
+        }
+    }
     
     func chooseCard(at index: Int) {
 
         if !cards[index].isMatched {
-//            print("card index is [\(index)] ", terminator: "")
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 //check if cards match
                 if cards[matchIndex].identifier == cards[index].identifier {
                     //cards is matched
-                    cards[matchIndex]
-                        .isMatched = true
+                    cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
                     numbersOfPairsOfCards -= 1
+                    
                     if numbersOfPairsOfCards == 0 {
                         print("game over")
                         return
                     }
                 }
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
+//                indexOfOneAndOnlyFaceUpCard = nil
             } else {
                 
                 //either no cards or 2 cards are face up

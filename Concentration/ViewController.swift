@@ -16,8 +16,16 @@ import MapKit
 class ViewController: UIViewController {
     //init our class concentration
     //count + 1 / 2 - количество наших карточек
+    
     //lazy - значит что может быть инициализирована но не обязательно использована
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+//    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    
+    var numberOfPairsOfCards: Int { //read only computed property
+//        get {
+            return (cardButtons.count + 1) / 2
+//        }
+    }
     
     var flipCount = 0 {
         didSet { //наблюдатель - следит за значением, если что то обновилось
