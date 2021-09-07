@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     
     //lazy - значит что может быть инициализирована но не обязательно использована
 //    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
-    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     
     var numberOfPairsOfCards: Int { //read only computed property
 //        get {
@@ -27,26 +27,26 @@ class ViewController: UIViewController {
 //        }
     }
     
-    var flipCount = 0 {
+    private(set) var flipCount = 0 { //private for set
         didSet { //наблюдатель - следит за значением, если что то обновилось
         flipCountLabel.text = "Flips : \(flipCount)"
         }
     }
     
     //надпись внизу
-    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var flipCountLabel: UILabel!
     
     //типо массив кнопок
-    @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet private var cardButtons: [UIButton]!
     
-    @IBAction func newGame(_ sender: UIButton) {
+    @IBAction private func newGame(_ sender: UIButton) {
         print("new game")
     }
     
-    @IBOutlet weak var newGameButton: UIButton!
+    @IBOutlet private weak var newGameButton: UIButton!
     
     //actions:_ - имя внешнее аргумента sender - внутреннее имя
-    @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction private func touchCard(_ sender: UIButton) {
 //        print("Touch card:")
         flipCount += 1
         //тут мы чекаем не возвращается ли нам нил
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func startNewGame(_ sender: UIButton) {
+    @IBAction private func startNewGame(_ sender: UIButton) {
         for id in 0..<game.cards.count {
             game.cards[id].isFaceUp = false
             game.cards[id].isMatched = false
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         flipCount = 0
     }
     
-    func updateViewFromModel() {
+    private func updateViewFromModel() {
         //.indeces - all indices
         if game.numbersOfPairsOfCards == 0 {
            newGameButton.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
@@ -100,21 +100,146 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoices = ["🦇", "😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎"]
+    private var emojiChoices = ["🦇", "😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎"]
     
-    var emoji = [Int:String]() //dictionary init
+    private var emoji = [Int:String]() //dictionary init
 
     //MARK: handle card touch behavior
 
-    func emoji(for card: Card) -> String {
+    private func emoji(for card: Card) -> String {
 //        print("emoji func: \(Card.identifierFactory)")
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-            emoji[card.identifier] = emojiChoices.remove(at: randomIndex) //удаляем из массива строк  и добавляем в словарь
+//            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count))) //используем extension для рандомного присвоения карточек
+            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random) //удаляем из массива строк  и добавляем в словарь
         }
         return emoji[card.identifier] ?? "?" //??-check nil
     }
     
-    
 }
 
+extension Int { // расширение для Int
+    var arc4random: Int {
+        if self > 0 {
+        return Int(arc4random_uniform(UInt32(self)))
+        } else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(abs(self))))
+        } else { return 0 }
+    }
+}
+
+
+//-------------------------------test section-------------------------------------------------
+    
+//-------------------------enums //data types-------------------------
+enum FastFoodMenuItem {
+    case hamburger(numberOfPatties: Int)
+    case fries(size: FryOrderSize)
+    case drink(String, liter: Double) // associate value
+    case cookie
+    
+    //enums can have method
+    func isIncludedInSpecialOrder(number: Int) -> Bool {
+        switch self {
+        case .hamburger(let pattyCount): return pattyCount == number
+        case .fries, .cookie: return true
+        case .drink(_, let liter): return liter == 0.5 //return true if liter == 0.5
+        }
+    }
+    
+    //modifiing yourself
+    mutating func switchToBeingACookie() { //value type - copy on write
+        self = .cookie //this work if self is a .hamburger of frie or etc
+    }
+    var calories: Int { return 100 }
+}
+
+enum FryOrderSize {
+    case large
+    case small
+}
+
+//let menuItem: FastFoodMenuItem = FastFoodMenuItem.hamburger(numberOfPatties: 2)
+var otherItem2: FastFoodMenuItem = .cookie
+var otherItem: FastFoodMenuItem = FastFoodMenuItem.cookie
+var otherItem1 = FastFoodMenuItem.hamburger(numberOfPatties: 2)
+var Item = FastFoodMenuItem.fries
+
+//func test() {
+    var menuItem  = FastFoodMenuItem.hamburger(numberOfPatties: 2)
+//
+//    switch menuItem {
+//    case .hamburger: print("burger")
+//    case .fries: print("fries")
+                //print("yammy")
+////      case .drink: print("drink")
+////      case .cookie: print("cookie")
+//    default: print("other")
+//    }
+//
+//}
+
+//switch menuItem {
+//case .hamburger(let pattyCount): print("a burger with \(pattyCount) patties")
+//}
+
+//---------------------------------optionals---------------- //opitonals its enums
+//enum Optional<T> {
+//    case none         //nil
+//    case some(<T>) //value
+//}
+
+class Test {
+    var hello: String?              //var hello: Optional<String> = .none
+    var hello1: String? = "helloo"  //var hello1: Optional<String> = .some("helloo")
+    var hello2: String? = nil       //var hello2: Optional<String> = .none
+    
+    func test() {
+        var someNumber: Int?
+        someNumber = 3
+        //Force unwrap
+        //    print(someNumber!) - error without value. use only with value
+        
+        //if let
+        
+        if let number  = someNumber {
+            print(number)
+        } else {
+            print("there is no number")
+        }
+        
+        //Nil-Coalescing operator //оператор объединения по nil
+        
+        print(someNumber ?? 1234)
+        
+        //guard
+        
+        func multiplyByTwo(number: Int?) {
+            guard let guardNumber = number else {
+                print("there is nil")
+                return
+            }
+            print("\(guardNumber) x 2 = \(guardNumber * 2)")
+        }
+        
+        //Optional chaining
+        struct iPhone {
+            var model: String
+            var memory: Int
+            var color: String
+        }
+        var myIphone: iPhone?
+        myIphone = iPhone(model: "Iphone 7", memory: 128, color: "black")
+        
+        let deviceColor = myIphone?.color // deviceColor is auto optional
+        
+        if let phoneColor = deviceColor {
+            print("the color is \(phoneColor)")
+        }
+        
+    }
+}
+
+//memory management-----------
+//strong: keep that thing in the heap as long as this is around(default)
+//weak: if thats reference goes - set to nil
+//enownde: "don't reference count this; crash if i'm wrong"

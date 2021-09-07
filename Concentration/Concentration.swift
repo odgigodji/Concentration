@@ -14,13 +14,13 @@ class Concentration {
     //API design
 //    var cards: Array<Card>
 //    var cards = Array<Card>()
-    var cards = [Card]()
+    var cards = [Card]() //u can get but not set
 
     var numbersOfPairsOfCards = 0
 //    var indexOfOneAndOnlyFaceUpCard: Int? //old version
     
     //computed properties
-    var indexOfOneAndOnlyFaceUpCard: Int? {
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             //calculate value depend on class member and logic
             var foundIndex: Int? // = nil for default
@@ -37,13 +37,13 @@ class Concentration {
         set(newValue) { //we can dont write "newValue" - default it is // just "set"
             print("newValue is \(String(describing: newValue))")
             for index in cards.indices { //go throug all cards while not
-                cards[index].isFaceUp = (index == newValue) //its bool
+                     cards[index].isFaceUp = (index == newValue) //its bool
             }
         }
     }
     
     func chooseCard(at index: Int) {
-
+        assert(cards.indices.contains(index), "Concerntration.chooseCard(at: \(index) : chosen index not in the cards")
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 //check if cards match
@@ -62,11 +62,7 @@ class Concentration {
 //                indexOfOneAndOnlyFaceUpCard = nil
             } else {
                 
-                //either no cards or 2 cards are face up
-                for flipDownIndex in cards.indices {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-            cards[index].isFaceUp = true
+//                //either no cards or 2 cards are face up
             indexOfOneAndOnlyFaceUpCard = index
             }
         }
