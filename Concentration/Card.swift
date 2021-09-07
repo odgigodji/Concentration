@@ -6,34 +6,21 @@
 //  Copyright © 2021 School21 namerei. All rights reserved.
 //
 
-//model not UI
 import Foundation
 
-//no inheritance in struct
-//structs are value types
 struct Card {
-    var isFaceUp = false  //лицевой стороной вверх
-    var isMatched = false //совпала
+    var isFaceUp = false
+    var isMatched = false
     var identifier: Int
-    
-    //i - internal namec
-    //identifier - external name
 
-//    init(identifier i: Int) {
-//        identifier = i
-//    }
     
     private static var identifierFactory = 0
     
-    //static func is
     private static func getUniqueIdentifier() -> Int {
         identifierFactory += 1
         return identifierFactory
     }
-    
-    //self. - fix
     init() {
         self.identifier = Card.getUniqueIdentifier()
-//        print("identifier is \(self.identifier)")
     }
 }
