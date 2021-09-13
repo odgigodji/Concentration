@@ -1,5 +1,5 @@
 # Concentration
-App on Swift 
+A litle game on Swift 
 
 ![ScreenShot](https://i.ibb.co/hsWCRqy/ezgif-com-gif-maker-2.gif)
 
